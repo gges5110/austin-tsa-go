@@ -4,11 +4,56 @@
     <meta charset="utf-8">
     <title>Austin TSA Go</title>
     <% include ../partials/header.ejs %>
+    <style media="screen">
+      .Site {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      .Site-content {
+        flex: 1;
+      }
+      .footer.segment {
+        padding: 3em 0em;
+      }
+    </style>
   </head>
-  <body>
+  <body class="Site">
     <div class="ui container">
-      <% include ../partials/nav.ejs %>
-      This is a website for UT TSA to provide live information .
+    <% include ../partials/nav.ejs %>
+    </div>
+    <main class="Site-content">
+      <div class="ui container">
+        <img src="/pictures/customLogo.png" alt="">
+        <p>
+          This is a website for UT TSA to provide live information.
+        </p>
+      </div>
+    </main>
+    <div class="ui inverted vertical footer segment">
+      <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+          <div class="three wide column">
+            <h4 class="ui inverted header">TSA links</h4>
+            <div class="ui inverted link list">
+              <a href="https://www.facebook.com/groups/185901551529428/" target="_blank" class="item">Facebook Fan Page</a>
+              <a href="https://sites.google.com/site/tsaattexas/team-announcements" target="_blank" class="item">News Blog</a>
+              <a href="mailto:tsa.in.texas@gmail.com" target="_blank" class="item">Email</a>
+            </div>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">Sponsors</h4>
+            <div class="ui inverted link list">
+              <a href="http://www.charlene-transport.com/" target="_blank" class="item">巨力海運</a>
+            </div>
+          </div>
+          <div class="seven wide column">
+            <h4 class="ui inverted header">Footer Header</h4>
+            <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

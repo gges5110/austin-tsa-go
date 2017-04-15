@@ -6,9 +6,26 @@ router.get('/food', function(request, response) {
   if (request.query.name) {
     name = request.query.name;
   }
+  var restuartant_list = [
+    {
+      'location': {
+        'lat': 30.282553,
+        'lng': -97.742228
+      },
+      'name': "Cocos"
+    },
+    {
+      'location': {
+        'lat': 30.286311,
+        'lng': -97.742408
+      },
+      'name': "Song La"
+    }
+  ];
 
   response.render('pages/food', {
-    name: name
+    name: name,
+    restuartant_list: restuartant_list
   });
 });
 

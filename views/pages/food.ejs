@@ -8,21 +8,45 @@
   <body>
     <div class="ui container">
       <% include ../partials/nav.ejs %>
-      <%= name %>
-      <div id="map" style="height: 400px;"></div>
+      <div id="map" style="height: 600px;"></div>
     </div>
 
     <script>
+      function openInNewTab(url) {
+        var win = window.open(url, '_blank');
+        win.focus();
+      }
+
       function initMap() {
-        var uluru = {lat: 30.2849, lng: -97.7341};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 11,
-          center: uluru
+        var UTlocation = {lat: 30.2849, lng: -97.7341}
+        var mapOptions = {
+          zoom: 14,
+          center: UTlocation
+        }
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        <% for(var i = 0; i < restuartant_list.length; ++i) { %>
+        var contentString<%= i %> = "<%= restuartant_list[i].name %>";
+        var infowindow<%= i %> = new google.maps.InfoWindow({
+          content: contentString<%= i %>
         });
-        var marker = new google.maps.Marker({
-          position: uluru,
+
+        var uluru<%= i %> = {lat: <%= restuartant_list[i].location.lat %>, lng: <%= restuartant_list[i].location.lng %>};
+        var marker<%= i %> = new google.maps.Marker({
+          position: uluru<%= i %>,
           map: map
         });
+        marker<%= i %>.addListener('mouseover', function() {
+          infowindow<%= i %>.open(map, marker<%= i %>);
+        });
+
+        marker<%= i %>.addListener('mouseout', function() {
+          infowindow<%= i %>.close(map, marker<%= i %>);
+        });
+
+        marker<%= i %>.addListener('click', function() {
+          openInNewTab("https://www.google.com/maps/?q=<%= restuartant_list[i].location.lat %>,<%= restuartant_list[i].location.lng %>");
+        });
+        <% } %>
       }
     </script>
     <script async defer
