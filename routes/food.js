@@ -12,14 +12,24 @@ router.get('/food', function(request, response) {
         'lat': 30.282553,
         'lng': -97.742228
       },
-      'name': "Cocos"
+      'name': "Cocos",
+      'catagory': "Taiwanese Food"
     },
     {
       'location': {
         'lat': 30.286311,
         'lng': -97.742408
       },
-      'name': "Song La"
+      'name': "Song La",
+      'catagory': "Taiwanese Food"
+    },
+    {
+      'location': {
+        'lat': 30.288080,
+        'lng': -97.744095
+      },
+      'name': "Little Sheep Mongolian Hot Pot",
+      'catagory': "Chinese Food"
     }
   ];
 

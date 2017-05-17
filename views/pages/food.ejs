@@ -8,10 +8,30 @@
   <body>
     <div class="ui container">
       <% include ../partials/nav.ejs %>
+
+      <!-- <div class="ui form">
+        <div class="field">
+          <label>Food Type</label>
+          <select class="ui search dropdown">
+            <option value="">Select Type</option>
+            <option value="TA">Taiwanese</option>
+            <option value="JA">Japanese</option>
+            <option value="ME">Mexican</option>
+            <option value="TH">Thai</option>
+          </select>
+        </div>
+      </div> -->
+
       <div id="map" style="height: 600px;"></div>
     </div>
 
-    <script>
+    <script type="text/javascript">
+      $(function() {
+        $('.ui.dropdown')
+        .dropdown()
+        ;
+      });
+
       function openInNewTab(url) {
         var win = window.open(url, '_blank');
         win.focus();
