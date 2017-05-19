@@ -12,7 +12,6 @@
 }
 
 .page-bg {
-
   filter: blur(3px);
   position: fixed;
   width: 100%;
@@ -21,6 +20,18 @@
   left: 0;
   z-index: -1;
   background-image:url("../pictures/Texas-Bridge-Desktop-Background.jpg");
+  background-size: 100% 100%;
+}
+
+.food-page-background {
+  filter: blur(1px);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-image:url("../pictures/Fixe-Austin.jpg");
   background-size: 100% 100%;
 }
 

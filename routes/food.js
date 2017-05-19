@@ -6,14 +6,14 @@ router.get('/food', function(request, response) {
   if (request.query.name) {
     name = request.query.name;
   }
-  var restuartant_list = [
+  var restaurant_list = [
     {
       'location': {
         'lat': 30.282553,
         'lng': -97.742228
       },
       'name': "Cocos",
-      'catagory': "Taiwanese Food"
+      'catagory': "Taiwanese"
     },
     {
       'location': {
@@ -21,7 +21,7 @@ router.get('/food', function(request, response) {
         'lng': -97.742408
       },
       'name': "Song La",
-      'catagory': "Taiwanese Food"
+      'catagory': "Taiwanese"
     },
     {
       'location': {
@@ -29,13 +29,29 @@ router.get('/food', function(request, response) {
         'lng': -97.744095
       },
       'name': "Little Sheep Mongolian Hot Pot",
-      'catagory': "Chinese Food"
+      'catagory': "Taiwanese"
+    },
+    {
+      'location': {
+        'lat': 30.285649,
+        'lng': -97.742062
+      },
+      'name': "Chipotle",
+      'catagory': "Mexican"
+    },
+    {
+      'location': {
+        'lat': 30.287719,
+        'lng': -97.745573
+      },
+      'name': "Sushi Niichi",
+      'catagory': "Japanese"
     }
   ];
 
   response.render('pages/food', {
     name: name,
-    restuartant_list: restuartant_list
+    restaurant_list: restaurant_list
   });
 });
 

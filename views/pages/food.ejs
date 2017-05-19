@@ -5,37 +5,111 @@
     <title>Food - Austin TSA Go</title>
     <% include ../partials/header.ejs %>
   </head>
-  <body>
+  <body class="Site">
+    <div class="food-page-background"></div>
     <div class="ui container">
       <% include ../partials/nav.ejs %>
 
-      <!-- <div class="ui form">
-        <div class="field">
-          <label>Food Type</label>
-          <select class="ui search dropdown">
-            <option value="">Select Type</option>
-            <option value="TA">Taiwanese</option>
-            <option value="JA">Japanese</option>
-            <option value="ME">Mexican</option>
-            <option value="TH">Thai</option>
-          </select>
-        </div>
-      </div> -->
+      <div class="ui two column grid">
+        <div class="four wide column">
+          <div class="ui card">
+            <div class="content">
+              <div class="header">Please Select</div>
+            </div>
+            <div class="content">
+              <h4 class="ui sub header">Food Type</h4>
+                <div class="ui small feed">
+                  <div class="ui form">
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-taiwanese">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>Taiwanese</label>
+                      </div>
+                    </div>
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-japanese">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>Japanese</label>
+                      </div>
+                      <label></label>
+                    </div>
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-mexican">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>Mexican</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-      <div id="map" style="height: 600px;"></div>
-    </div>
+              <!-- <div class="extra content">
+                <h4 class="ui sub header">Bus route</h4>
+                <div class="ui form">
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden">
+                      <label>670-CP CROSSING PLACE</label>
+                    </div>
+                  </div>
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden">
+                      <label>641-EC EAST CAMPUS</label>
+                    </div>
+                    <label></label>
+                  </div>
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden" >
+                      <label>661-FW FAR WEST/UT</label>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- <div class="extra content">
+                <button class="ui button" id="toggle">Apply Filter</button>
+              </div> -->
+            </div>
+          </div>
+
+        <div class="twelve wide column">
+          <div id="map" style="height: 600px;"></div>
+        </div>
+      </div>
 
     <script type="text/javascript">
       $(function() {
-        $('.ui.dropdown')
-        .dropdown()
-        ;
+
+        // $('#toggle1').checkbox({
+        //     onChange: function() {
+        //       console.log('aaa');
+        //     }
+        // });
       });
 
       function openInNewTab(url) {
         var win = window.open(url, '_blank');
         win.focus();
       }
+
+      var markers = {
+        <% for(var i = 0; i < restaurant_list.length; ++i) { %>
+          "<%= restaurant_list[i].name %>" : {
+            "lat": "<%= restaurant_list[i].location.lat %>",
+            "lng": "<%= restaurant_list[i].location.lng %>",
+            "name": "<%= restaurant_list[i].name %>",
+            "catagory": "<%= restaurant_list[i].catagory %>",
+            "visible": false
+          }
+          <% if(i != restaurant_list.length - 1) { %>
+            ,
+          <% } %>
+        <% } %>
+      }
+
+      var posMarkers = {}, infoWindows = {};
 
       function initMap() {
         var UTlocation = {lat: 30.2849, lng: -97.7341}
@@ -44,29 +118,78 @@
           center: UTlocation
         }
         var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        <% for(var i = 0; i < restuartant_list.length; ++i) { %>
-        var contentString<%= i %> = "<%= restuartant_list[i].name %>";
-        var infowindow<%= i %> = new google.maps.InfoWindow({
-          content: contentString<%= i %>
+        var image = 'http://www.myiconfinder.com/uploads/iconsets/32-32-a5485b563efc4511e0cd8bd04ad0fe9e.png';
+
+        for (marker in markers) {
+          posMarkers[marker] = new google.maps.Marker({
+            position: new google.maps.LatLng(markers[marker].lat, markers[marker].lng),
+            map: map,
+            icon: image,
+            visible: markers[marker].visible
+          });
+
+          infoWindows[marker] = new google.maps.InfoWindow({
+            content: markers[marker].name
+          });
+
+          posMarkers[marker].addListener('mouseover', function(innerKey) {
+            return function() {
+              infoWindows[innerKey].open(map, posMarkers[innerKey]);
+            }
+          }(marker));
+
+          posMarkers[marker].addListener('mouseout', function(innerKey) {
+            return function() {
+              infoWindows[innerKey].close(map, posMarkers[innerKey]);
+            }
+          }(marker));
+
+          posMarkers[marker].addListener('click', function(innerKey) {
+            return function() {
+              openInNewTab("https://www.google.com/maps/?q=" + markers[innerKey].lat + "," + markers[innerKey].lng);
+            }
+          }(marker));
+        }
+
+        $('#checkbox-taiwanese').checkbox('setting', 'onChange', function() {
+          for (var marker in markers) {
+            if (markers[marker].catagory == "Taiwanese") {
+              if(posMarkers[marker].getVisible()) {
+                posMarkers[marker].setVisible(false);
+              }
+              else {
+                posMarkers[marker].setVisible(true);
+              }
+            }
+          }
         });
 
-        var uluru<%= i %> = {lat: <%= restuartant_list[i].location.lat %>, lng: <%= restuartant_list[i].location.lng %>};
-        var marker<%= i %> = new google.maps.Marker({
-          position: uluru<%= i %>,
-          map: map
-        });
-        marker<%= i %>.addListener('mouseover', function() {
-          infowindow<%= i %>.open(map, marker<%= i %>);
+        $('#checkbox-japanese').checkbox('setting', 'onChange', function() {
+          for (var marker in markers) {
+            if (markers[marker].catagory == "Japanese") {
+              if(posMarkers[marker].getVisible()) {
+                posMarkers[marker].setVisible(false);
+              }
+              else {
+                posMarkers[marker].setVisible(true);
+              }
+            }
+          }
         });
 
-        marker<%= i %>.addListener('mouseout', function() {
-          infowindow<%= i %>.close(map, marker<%= i %>);
+        $('#checkbox-mexican').checkbox('setting', 'onChange', function() {
+          for (var marker in markers) {
+            if (markers[marker].catagory == "Mexican") {
+              if(posMarkers[marker].getVisible()) {
+                posMarkers[marker].setVisible(false);
+              }
+              else {
+                posMarkers[marker].setVisible(true);
+              }
+            }
+          }
         });
 
-        marker<%= i %>.addListener('click', function() {
-          openInNewTab("https://www.google.com/maps/?q=<%= restuartant_list[i].location.lat %>,<%= restuartant_list[i].location.lng %>");
-        });
-        <% } %>
       }
     </script>
     <script async defer
