@@ -21,21 +21,21 @@
                 <div class="ui small feed">
                   <div class="ui form">
                     <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-taiwanese">
-                        <input type="checkbox" tabindex="0" class="hidden">
+                      <div class="ui checked checkbox" id="checkbox-taiwanese">
+                        <input type="checkbox" tabindex="0" class="hidden" checked="">
                         <label>Taiwanese</label>
                       </div>
                     </div>
                     <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-japanese">
-                        <input type="checkbox" tabindex="0" class="hidden">
+                      <div class="ui checked checkbox" id="checkbox-japanese">
+                        <input type="checkbox" tabindex="0" class="hidden" checked="">
                         <label>Japanese</label>
                       </div>
                       <label></label>
                     </div>
                     <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-mexican">
-                        <input type="checkbox" tabindex="0" class="hidden">
+                      <div class="ui checked checkbox" id="checkbox-mexican">
+                        <input type="checkbox" tabindex="0" class="hidden" checked="">
                         <label>Mexican</label>
                       </div>
                     </div>
@@ -78,6 +78,8 @@
           <div id="map" style="height: 600px;"></div>
         </div>
       </div>
+    </div>
+
 
     <script type="text/javascript">
       $(function() {
@@ -101,7 +103,7 @@
             "lng": "<%= restaurant_list[i].location.lng %>",
             "name": "<%= restaurant_list[i].name %>",
             "catagory": "<%= restaurant_list[i].catagory %>",
-            "visible": false
+            "visible": true
           }
           <% if(i != restaurant_list.length - 1) { %>
             ,
@@ -110,6 +112,119 @@
       }
 
       var posMarkers = {}, infoWindows = {};
+      var styles = {
+        default: null,
+        retro: [
+          {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
+          {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
+          {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
+          {
+            featureType: 'administrative',
+            elementType: 'geometry.stroke',
+            stylers: [{color: '#c9b2a6'}]
+          },
+          {
+            featureType: 'administrative.land_parcel',
+            elementType: 'geometry.stroke',
+            stylers: [{color: '#dcd2be'}]
+          },
+          {
+            featureType: 'administrative.land_parcel',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#ae9e90'}]
+          },
+          {
+            featureType: 'landscape.natural',
+            elementType: 'geometry',
+            stylers: [{color: '#dfd2ae'}]
+          },
+          {
+            featureType: 'poi',
+            elementType: 'geometry',
+            stylers: [{color: '#dfd2ae'}]
+          },
+          {
+            featureType: 'poi',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#93817c'}]
+          },
+          {
+            featureType: 'poi.park',
+            elementType: 'geometry.fill',
+            stylers: [{color: '#a5b076'}]
+          },
+          {
+            featureType: 'poi.park',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#447530'}]
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: [{color: '#f5f1e6'}]
+          },
+          {
+            featureType: 'road.arterial',
+            elementType: 'geometry',
+            stylers: [{color: '#fdfcf8'}]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'geometry',
+            stylers: [{color: '#f8c967'}]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'geometry.stroke',
+            stylers: [{color: '#e9bc62'}]
+          },
+          {
+            featureType: 'road.highway.controlled_access',
+            elementType: 'geometry',
+            stylers: [{color: '#e98d58'}]
+          },
+          {
+            featureType: 'road.highway.controlled_access',
+            elementType: 'geometry.stroke',
+            stylers: [{color: '#db8555'}]
+          },
+          {
+            featureType: 'road.local',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#806b63'}]
+          },
+          {
+            featureType: 'transit.line',
+            elementType: 'geometry',
+            stylers: [{color: '#dfd2ae'}]
+          },
+          {
+            featureType: 'transit.line',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#8f7d77'}]
+          },
+          {
+            featureType: 'transit.line',
+            elementType: 'labels.text.stroke',
+            stylers: [{color: '#ebe3cd'}]
+          },
+          {
+            featureType: 'transit.station',
+            elementType: 'geometry',
+            stylers: [{color: '#dfd2ae'}]
+          },
+          {
+            featureType: 'water',
+            elementType: 'geometry.fill',
+            stylers: [{color: '#b9d3c2'}]
+          },
+          {
+            featureType: 'water',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#92998d'}]
+          }
+        ]
+      };
 
       function initMap() {
         var UTlocation = {lat: 30.2849, lng: -97.7341}
@@ -190,7 +305,11 @@
           }
         });
 
+        // Set the map's style to the initial value of the selector.
+        map.setOptions({styles: styles['retro']});
       }
+
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqSZN4x6BL2glI3tRmXSBLryKO1m1ugBA&callback=initMap">

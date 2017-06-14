@@ -8,7 +8,128 @@
   <body>
     <div class="ui container">
       <% include ../partials/nav.ejs %>
-      <% include ../partials/under_construction.ejs %>
+
+      <div class="ui two column grid">
+        <div class="four wide column">
+          <div class="ui card">
+            <div class="content">
+              <div class="header">Please Select</div>
+            </div>
+            <div class="content">
+              <h4 class="ui sub header">Region</h4>
+                <div class="ui small feed">
+                  <div class="ui form">
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-taiwanese">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>Lake Austin</label>
+                      </div>
+                    </div>
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-japanese">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>Far West</label>
+                      </div>
+                      <label></label>
+                    </div>
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-japanese">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>West Campus</label>
+                      </div>
+                      <label></label>
+                    </div>
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-mexican">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>Red River</label>
+                      </div>
+                    </div>
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-mexican">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>Intramural Fields</label>
+                      </div>
+                    </div>
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-mexican">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>North Riverside</label>
+                      </div>
+                    </div>
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-mexican">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>Lake Shore</label>
+                      </div>
+                    </div>
+                    <div class="inline field">
+                      <div class="ui checkbox" id="checkbox-mexican">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>Crossing Place</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="twelve wide column">
+          <div id="map" style="height: 600px;"></div>
+        </div>
+      </div>
     </div>
+
+    <script>
+      // Define the LatLng coordinates for the polygon's path.
+      var regionCoords = new Array();
+      regionCoords[0] = [
+        {lat: 30.371362, lng: -97.757463},
+        {lat: 30.361453, lng: -97.744634},
+        {lat: 30.336739, lng: -97.755791},
+        {lat: 30.354580, lng: -97.769907}
+      ];
+      regionCoords[1] = [
+        {lat: 30.291568, lng: -97.783276},
+        {lat: 30.278542, lng: -97.773167},
+        {lat: 30.276779, lng: -97.774856},
+        {lat: 30.289068, lng: -97.785953}
+      ];
+      regionCoords[2] = [
+        {lat: 30.292183, lng: -97.741130},
+        {lat: 30.281791, lng: -97.742120},
+        {lat: 30.284672, lng: -97.752860},
+        {lat: 30.298189, lng: -97.748447},
+        {lat: 30.295422, lng: -97.742900}
+      ];
+
+      function initMap() {
+        var UTlocation = {lat: 30.2849, lng: -97.7341}
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: UTlocation,
+          zoom: 12
+        });
+
+        var regionPolygon = new Array();
+        // Construct the polygon.
+        for (i = 0; i < regionCoords.length; ++i) {
+          regionPolygon[i] = new google.maps.Polygon({
+            paths: regionCoords[i],
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35
+          });
+          regionPolygon[i].setMap(map);
+        }
+
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqSZN4x6BL2glI3tRmXSBLryKO1m1ugBA&callback=initMap"
+    async defer></script>
   </body>
 </html>

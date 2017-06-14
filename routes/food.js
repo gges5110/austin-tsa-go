@@ -41,6 +41,14 @@ router.get('/food', function(request, response) {
     },
     {
       'location': {
+        'lat': 30.291532,
+        'lng': -97.734966
+      },
+      'name': "Taco Joint",
+      'catagory': "Mexican"
+    },
+    {
+      'location': {
         'lat': 30.287719,
         'lng': -97.745573
       },
