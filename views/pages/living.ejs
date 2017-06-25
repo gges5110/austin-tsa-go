@@ -20,53 +20,53 @@
                 <div class="ui small feed">
                   <div class="ui form">
                     <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-taiwanese">
-                        <input type="checkbox" tabindex="0" class="hidden">
-                        <label>Lake Austin</label>
+                      <div class="ui checkbox" id="lake-austin">
+                        <input type="checkbox" tabindex="0" class="hidden" checked=''>
+                        <label id=lake-austin-label>Lake Austin</label>
                       </div>
                     </div>
                     <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-japanese">
-                        <input type="checkbox" tabindex="0" class="hidden">
-                        <label>Far West</label>
-                      </div>
-                      <label></label>
-                    </div>
-                    <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-japanese">
-                        <input type="checkbox" tabindex="0" class="hidden">
-                        <label>West Campus</label>
+                      <div class="ui checkbox" id="far-west">
+                        <input type="checkbox" tabindex="0" class="hidden" checked=''>
+                        <label id='far-west-label'>Far West</label>
                       </div>
                       <label></label>
                     </div>
                     <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-mexican">
-                        <input type="checkbox" tabindex="0" class="hidden">
-                        <label>Red River</label>
+                      <div class="ui checkbox" id="west-campus">
+                        <input type="checkbox" tabindex="0" class="hidden" checked=''>
+                        <label id='west-campus-label'>West Campus</label>
+                      </div>
+                      <label></label>
+                    </div>
+                    <div class="inline field">
+                      <div class="ui checkbox" id="red-river">
+                        <input type="checkbox" tabindex="0" class="hidden" checked=''>
+                        <label id='red-river-label'>Red River</label>
                       </div>
                     </div>
                     <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-mexican">
-                        <input type="checkbox" tabindex="0" class="hidden">
-                        <label>Intramural Fields</label>
+                      <div class="ui checkbox" id="intramural-fields">
+                        <input type="checkbox" tabindex="0" class="hidden" checked=''>
+                        <label id='intramural-fields-label'>Intramural Fields</label>
                       </div>
                     </div>
                     <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-mexican">
-                        <input type="checkbox" tabindex="0" class="hidden">
-                        <label>North Riverside</label>
+                      <div class="ui checkbox" id="north-riverside">
+                        <input type="checkbox" tabindex="0" class="hidden" checked=''>
+                        <label id='north-riverside-label'>North Riverside</label>
                       </div>
                     </div>
                     <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-mexican">
-                        <input type="checkbox" tabindex="0" class="hidden">
-                        <label>Lake Shore</label>
+                      <div class="ui checkbox" id="lake-shore">
+                        <input type="checkbox" tabindex="0" class="hidden" checked=''>
+                        <label id='lake-shore-label'>Lake Shore</label>
                       </div>
                     </div>
                     <div class="inline field">
-                      <div class="ui checkbox" id="checkbox-mexican">
-                        <input type="checkbox" tabindex="0" class="hidden">
-                        <label>Crossing Place</label>
+                      <div class="ui checkbox" id="crossing-place">
+                        <input type="checkbox" tabindex="0" class="hidden" checked=''>
+                        <label id='crossing-place-label'>Crossing Place</label>
                       </div>
                     </div>
                   </div>
@@ -84,18 +84,21 @@
     <script>
       // Define the LatLng coordinates for the polygon's path.
       var regionCoords = new Array();
+      // Lake Austin
       regionCoords[0] = [
         {lat: 30.371362, lng: -97.757463},
         {lat: 30.361453, lng: -97.744634},
         {lat: 30.336739, lng: -97.755791},
         {lat: 30.354580, lng: -97.769907}
       ];
+      // Far West
       regionCoords[1] = [
         {lat: 30.291568, lng: -97.783276},
         {lat: 30.278542, lng: -97.773167},
         {lat: 30.276779, lng: -97.774856},
         {lat: 30.289068, lng: -97.785953}
       ];
+      // West Campus
       regionCoords[2] = [
         {lat: 30.292183, lng: -97.741130},
         {lat: 30.281791, lng: -97.742120},
@@ -103,6 +106,53 @@
         {lat: 30.298189, lng: -97.748447},
         {lat: 30.295422, lng: -97.742900}
       ];
+      // Red River
+      regionCoords[3] = [
+          {lat: 30.288315, lng: -97.728537},
+          {lat: 30.310921, lng: -97.716141},
+          {lat: 30.312996, lng: -97.720509},
+          {lat: 30.291466, lng: -97.734099}
+      ];
+      // Intramural Fields
+      regionCoords[4] = [
+          {lat: 30.317503, lng: -97.728402},
+          {lat: 30.315701, lng: -97.723185},
+          {lat: 30.308388, lng: -97.727516},
+          {lat: 30.310936, lng: -97.732717}
+      ];
+
+      // North Riverside
+      regionCoords[5] = [
+          {lat: 30.238601, lng: -97.719511},
+          {lat: 30.237566, lng: -97.717331},
+          {lat: 30.232738, lng: -97.720405},
+          {lat: 30.234039, lng: -97.722504}
+      ];
+      // Lake Shore
+      regionCoords[6] = [
+          {lat: 30.234499, lng: -97.722899},
+          {lat: 30.242457, lng: -97.717814},
+          {lat: 30.244792, lng: -97.729935},
+      ];
+      // Crossing Place
+      regionCoords[7] = [
+          {lat: 30.232593, lng: -97.719179},
+          {lat: 30.231045, lng: -97.715303},
+          {lat: 30.239749, lng: -97.710044},
+          {lat: 30.241332, lng: -97.713106}
+      ];
+
+      //
+      var regionStrokeColors = new Array();
+      regionStrokeColors[0] = '#E74C3C'
+      regionStrokeColors[1] = '#1F618D'
+      regionStrokeColors[2] = '#BA4A00'
+      regionStrokeColors[3] = '#27AE60'
+      regionStrokeColors[4] = '#F4D03F'
+      regionStrokeColors[5] = '#7D3C98'
+      regionStrokeColors[6] = '#82E0AA'
+      regionStrokeColors[7] = '#2E86C1'
+
 
       function initMap() {
         var UTlocation = {lat: 30.2849, lng: -97.7341}
@@ -117,14 +167,80 @@
         for (i = 0; i < regionCoords.length; ++i) {
           regionPolygon[i] = new google.maps.Polygon({
             paths: regionCoords[i],
-            strokeColor: '#FF0000',
+            strokeColor: regionStrokeColors[i],
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: '#FF0000',
+            fillColor: regionStrokeColors[i],
             fillOpacity: 0.35
           });
           regionPolygon[i].setMap(map);
         }
+
+        // Define the actions for checkboxes
+
+        $('#lake-austin').checkbox('setting', 'onChange', function() {
+          if(regionPolygon[0].getVisible()){
+            regionPolygon[0].setVisible(false);
+          }
+          else
+            regionPolygon[0].setVisible(true);
+        });
+
+        $('#far-west').checkbox('setting', 'onChange', function() {
+          if(regionPolygon[1].getVisible()){
+            regionPolygon[1].setVisible(false);
+          }
+          else
+            regionPolygon[1].setVisible(true);
+        });
+
+        $('#west-campus').checkbox('setting', 'onChange', function() {
+          if(regionPolygon[2].getVisible()){
+            regionPolygon[2].setVisible(false);
+          }
+          else
+            regionPolygon[2].setVisible(true);
+        });
+
+        $('#red-river').checkbox('setting', 'onChange', function() {
+          if(regionPolygon[3].getVisible()){
+            regionPolygon[3].setVisible(false);
+          }
+          else
+            regionPolygon[3].setVisible(true);
+        });
+
+        $('#intramural-fields').checkbox('setting', 'onChange', function() {
+          if(regionPolygon[4].getVisible()){
+            regionPolygon[4].setVisible(false);
+          }
+          else
+            regionPolygon[4].setVisible(true);
+        });
+
+        $('#north-riverside').checkbox('setting', 'onChange', function() {
+          if(regionPolygon[5].getVisible()){
+            regionPolygon[5].setVisible(false);
+          }
+          else
+            regionPolygon[5].setVisible(true);
+        });
+
+        $('#lake-shore').checkbox('setting', 'onChange', function() {
+          if(regionPolygon[6].getVisible()){
+            regionPolygon[6].setVisible(false);
+          }
+          else
+            regionPolygon[6].setVisible(true);
+        });
+
+        $('#crossing-place').checkbox('setting', 'onChange', function() {
+          if(regionPolygon[7].getVisible()){
+            regionPolygon[7].setVisible(false);
+          }
+          else
+            regionPolygon[7].setVisible(true);
+        });
 
       }
 

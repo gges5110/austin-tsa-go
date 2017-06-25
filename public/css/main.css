@@ -48,3 +48,35 @@ h1.white-text {
 h4.white-text {
   font-size: 24px;
 }
+
+#lake-austin-label{
+  color: #E74C3C;
+}
+
+#far-west-label{
+  color: #1F618D;
+}
+
+#west-campus-label{
+  color: #BA4A00;
+}
+
+#red-river-label{
+  color: #27AE60;
+}
+
+#intramural-fields-label{
+  color: #F4D03F;
+}
+
+#north-riverside-label{
+  color: #7D3C98;
+}
+
+#lake-shore-label{
+  color: #82E0AA;
+}
+
+#crossing-place-label{
+  color: #2E86C1;
+}
