@@ -8,7 +8,10 @@ var env = process.env.NODE_ENV || 'development';
 var routes_index = require('./routes/index.js');
 var routes_food = require('./routes/food.js');
 var routes_living = require('./routes/living.js');
-var routes_travel = require('./routes/travel.js')
+var routes_travel = require('./routes/travel.js');
+
+// Here are the routes for preparing to port to React.
+var routes_food_react = require('./routes/api/food.js');
 
 var app = express()
 
@@ -16,6 +19,8 @@ app.use(routes_index);
 app.use(routes_food);
 app.use(routes_living);
 app.use(routes_travel);
+
+app.use(routes_food_react);
 
 app.set('port', (process.env.PORT || 8000));
 
